@@ -1,11 +1,15 @@
+import Body from "./components/Body"
+import Footer from "./components/Footer"
+import Header from "./components/Header"
+
 function App() {
 
   return (
-    <>
       <div>
-        <h1 className='font-bold text-green-800 text-3xl'>lets goo vteeee!!!</h1>
-        </div>
-    </>
+        <Header/>
+        <Body/>
+        <Footer/>  
+      </div>
   )
 }
 
