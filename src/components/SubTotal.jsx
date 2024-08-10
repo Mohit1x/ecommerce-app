@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SubTotal = ({ total }) => {
   const [tax] = useState((5 / 100) * total);
@@ -27,7 +27,7 @@ const SubTotal = ({ total }) => {
     <div className="w-[400px] shadow-2xl mx-10 bg-[white]">
       <div>
         <p className="m-8 text-white/90 bg-blue-400 shadow-xl p-3 rounded-sm font-sm">
-          Congrats! You're eligible for{" "}
+          {` Congrats! You're eligible for`}{" "}
           <span className="font-bold text-green-300">Free Delivery.</span>
           <br /> Use code{" "}
           <button

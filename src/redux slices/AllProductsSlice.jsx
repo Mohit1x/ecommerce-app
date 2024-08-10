@@ -5,6 +5,7 @@ const AllProductsSlice = createSlice({
   initialState: {
     allProducts: [],
     cartProducts: [],
+    wishListProducts: [],
   },
   reducers: {
     addProducts: (state, action) => {
@@ -13,8 +14,15 @@ const AllProductsSlice = createSlice({
     addToCart: (state, action) => {
       state.cartProducts.push({ ...action.payload, quantity: 1 });
     },
+    addToWishList: (state, action) => {
+      state.wishListProducts.push(action.payload);
+    },
     deleteProduct: (state, action) => {
+      console.log(action);
       state.cartProducts.splice(action.payload, 1);
+    },
+    deleteWishListProduct: (state, action) => {
+      state.wishListProducts.splice(action.payload, 1);
     },
     increaseProduct: (state, action) => {
       const tempState = [...state.cartProducts];
@@ -35,6 +43,8 @@ export const {
   increaseProduct,
   decreaseProduct,
   deleteProduct,
+  addToWishList,
+  deleteWishListProduct,
 } = AllProductsSlice.actions;
 
 export default AllProductsSlice.reducer;

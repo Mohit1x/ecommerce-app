@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AMAZON_LOGO,
   SEARCH_ICON,
@@ -11,9 +10,10 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const cart = useSelector((store) => store.products.cartProducts);
+  const wishList = useSelector((store) => store.products.wishListProducts);
 
   return (
-    <div className="flex justify-between bg-[#1C2228] p-6 items-center shadow-md top-0 sticky z-50">
+    <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
         <img className="w-[125px]" src={AMAZON_LOGO} />{" "}
       </Link>
@@ -27,12 +27,21 @@ const Header = () => {
           <img className="w-9 h-8 cursor-pointer" src={SEARCH_ICON} />
         </div>
       </div>
-      <div className="flex items-center mr-10">
-        <img
-          className="w-[30px] h-[30px] mr-12 transition duration-300 hover:scale-[1.2] cursor-pointer"
-          src={WHISHLIST_ICON}
-        />
-        <div className="flex items-center mr-12 relative">
+      <div className="flex items-center gap-8 ">
+        <div className="relative">
+          <Link to="/wishlist">
+            <img
+              className="w-[30px] h-[30px]  transition duration-300 hover:scale-[1.2] cursor-pointer"
+              src={WHISHLIST_ICON}
+            />
+          </Link>
+          {!!wishList.length && (
+            <div className="bg-[#E99317] rounded-full w-6 flex items-center justify-center absolute -top-2 -right-3">
+              <p className="text-white font-semibold">{wishList.length}</p>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center relative">
           <Link to="/cart">
             <BsCart2 className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
           </Link>

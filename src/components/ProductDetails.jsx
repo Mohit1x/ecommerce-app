@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -46,6 +46,10 @@ const ProductDetails = () => {
     dispatch(addToCart({ ...detail, size: productSize[isSizeSelected] }));
   };
 
+  const handleBuyNow = () => {
+    dispatch(addToCart({ ...detail, size: productSize[isSizeSelected] }));
+  };
+
   return (
     <div className="bg-[#F6F5F5] flex justify-center">
       <div className="shadow-2xl bg-white h-[500px] w-[500px] my-20 mx-10 flex items-center justify-center rounded-xl relative">
@@ -85,9 +89,15 @@ const ProductDetails = () => {
           <div className="h-[1px] my-10 w-full bg-gray-300" />
           <p className="text-2xl font-bold">Price : ${detail?.price}</p>
           <div className="flex my-7">
-            <button className="text-xl h-[50px] bg-[#FF9500] font-bold text-white rounded-lg px-5 transition duration-300 hover:scale-[1.07]">
-              Buy Now
-            </button>
+            <Link to={"/cart"}>
+              {" "}
+              <button
+                onClick={handleBuyNow}
+                className="text-xl h-[50px] bg-[#FF9500] font-bold text-white rounded-lg px-5 transition duration-300 hover:scale-[1.07]"
+              >
+                Buy Now
+              </button>
+            </Link>
             <button
               onClick={() => setIsAdded(!isAdded)}
               className="flex items-center mx-4 text-xl bg-[#1C2228] h-[50px] px-5 rounded-lg text-white transition duration-300 hover:scale-[1.07]"

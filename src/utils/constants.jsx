@@ -15,3 +15,12 @@ export const USER_ICON =
 
 export const CART_BG_IMG =
   "https://shubho-amazon-clone.vercel.app/static/media/cart-empty.9c5e89fb4f9511722096.png";
+
+export const HERO_BG_IMG =
+  "https://shubho-amazon-clone.vercel.app/static/media/delivery.1f4bcc8fd76f28a79332.png";
+
+export const LOADING_SHIMMER =
+  "https://raw.githubusercontent.com/shubho0908/Amazon-clone/main/src/imgs/loading.gif";
+
+export const EMPTY_WISHLIST_SHIMMER =
+  "https://shubho-amazon-clone.vercel.app/static/media/empty.011a6ba680b0e6361a9e.png";

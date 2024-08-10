@@ -1,14 +1,16 @@
-import React from "react";
-import Home from "./Home";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import ScrollToTop from "../utils/ScrollToTop";
 
 const Body = () => {
   return (
-    <div>
+    <div className="h-full">
       <Header />
-      <Outlet />
+      <main className="mt-[100px]">
+        <ScrollToTop />
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
