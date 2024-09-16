@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addGrandTotal } from "../redux slices/AllProductsSlice";
 
 const SubTotal = ({ total }) => {
   const [tax] = useState((5 / 100) * total);
@@ -7,6 +9,16 @@ const SubTotal = ({ total }) => {
   const [showPromoCode, setShowPromoCode] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [discount, setDiscount] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    if (showPromoCode) {
+      dispatch(addGrandTotal((total - discount + tax).toFixed(2)));
+    } else {
+      dispatch(addGrandTotal((total + tax).toFixed(2)));
+    }
+  };
 
   const handlePromo = () => {
     setPromo("MOHIT20");
@@ -104,7 +116,10 @@ const SubTotal = ({ total }) => {
         </div>
         <div className="text-center py-7">
           <Link to={"/shipping/detail"}>
-            <button className="bg-[#FF9500] px-[15%] py-3 text-xl text-white font-bold transition duration-300 hover:scale-[1.06] rounded-md">
+            <button
+              onClick={handleSubmit}
+              className="bg-[#FF9500] px-[15%] py-3 text-xl text-white font-bold transition duration-300 hover:scale-[1.06] rounded-md"
+            >
               Proceed To Payment
             </button>
           </Link>

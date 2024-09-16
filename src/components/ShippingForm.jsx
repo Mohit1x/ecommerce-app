@@ -14,7 +14,6 @@ const ShippingForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(addUserData(data));
     navigate("/shipping/payment-methods");
   };
@@ -123,6 +122,24 @@ const ShippingForm = () => {
           )}
         </label>
       </div>
+      <label className="mx-auto">
+        <select
+          className="p-4 gap-2 border border-slate-300 rounded-md cursor-pointer"
+          {...register("method", { required: "choose at-least one method" })}
+        >
+          <option value={""}>Select Payment Method :</option>
+          {["cash on delivery", "credit/debit card"].map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        {errors.method && (
+          <p className="text-red-500 text-md font-bold">
+            {errors.method.message}
+          </p>
+        )}
+      </label>
       <button
         type="submit"
         className="bg-blue-600 p-2 w-fit rounded-md text-white font-semibold py-2"
