@@ -6,6 +6,9 @@ import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import Whislist from "./components/Whislist";
+import Shipping from "./components/Shipping";
+import ShippingForm from "./components/ShippingForm";
+import PaymentMethod from "./components/PaymentMethod";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -28,6 +31,20 @@ function App() {
         {
           path: "/wishlist",
           element: <Whislist />,
+        },
+        {
+          path: "/shipping",
+          element: <Shipping />,
+          children: [
+            {
+              path: "/shipping/detail",
+              element: <ShippingForm />,
+            },
+            {
+              path: "/shipping/payment-methods",
+              element: <PaymentMethod />,
+            },
+          ],
         },
       ],
     },

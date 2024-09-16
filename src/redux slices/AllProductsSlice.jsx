@@ -6,6 +6,7 @@ const AllProductsSlice = createSlice({
     allProducts: [],
     cartProducts: [],
     wishListProducts: [],
+    userData: [],
   },
   reducers: {
     addProducts: (state, action) => {
@@ -34,6 +35,9 @@ const AllProductsSlice = createSlice({
       temp[action.payload].quantity -= 1;
       state.cartProducts = temp;
     },
+    addUserData: (state, action) => {
+      state.userData = action.payload;
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const {
   deleteProduct,
   addToWishList,
   deleteWishListProduct,
+  addUserData,
 } = AllProductsSlice.actions;
 
 export default AllProductsSlice.reducer;

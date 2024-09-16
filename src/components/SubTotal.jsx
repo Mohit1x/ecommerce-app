@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SubTotal = ({ total }) => {
   const [tax] = useState((5 / 100) * total);
@@ -102,9 +103,11 @@ const SubTotal = ({ total }) => {
           )}
         </div>
         <div className="text-center py-7">
-          <button className="bg-[#FF9500] px-[15%] py-3 text-xl text-white font-bold transition duration-300 hover:scale-[1.06] rounded-md">
-            Proceed To Payment
-          </button>
+          <Link to={"/shipping/detail"}>
+            <button className="bg-[#FF9500] px-[15%] py-3 text-xl text-white font-bold transition duration-300 hover:scale-[1.06] rounded-md">
+              Proceed To Payment
+            </button>
+          </Link>
         </div>
       </div>
     </div>
