@@ -21,7 +21,7 @@ const ProductCard = ({ image, title, cat, ratings, price, id }) => {
       <div
         onMouseEnter={() => setIsSHowing(true)}
         onMouseLeave={() => setIsSHowing(false)}
-        className="shadow-md bg-[white] hover:opacity-80 h-[250px] w-[250px] flex items-center justify-center rounded-lg relative"
+        className="shadow-md bg-[white] hover:opacity-80 transition duration-300 h-[250px] w-[250px] flex items-center justify-center rounded-lg relative"
       >
         <span>
           {isClicked ? (

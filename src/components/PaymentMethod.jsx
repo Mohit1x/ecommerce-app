@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsFillCreditCardFill } from "react-icons/bs";
+import { addOrder } from "../redux slices/AllProductsSlice";
+import { useNavigate } from "react-router-dom";
 
 const PaymentMethod = () => {
   const {
@@ -13,6 +15,14 @@ const PaymentMethod = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+  };
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleOrder = () => {
+    dispatch(addOrder());
+    navigate("/orders");
   };
 
   return (
@@ -29,6 +39,9 @@ const PaymentMethod = () => {
           </label>
           <label className="text-md font-semibold">
             Payment Method : {info.method}
+          </label>
+          <label className="text-md font-semibold">
+            Total Amount : <span className="font-bold text-xl">${total}</span>
           </label>
         </div>
         {info.method === "credit/debit card" ? (
@@ -65,14 +78,18 @@ const PaymentMethod = () => {
               )}
             </div>
             <button
+              onClick={handleOrder}
               type="submit"
-              className="bg-[#FF9500] p-2 w-fit text-white rounded-md font-bold mt-4"
+              className="bg-[#FF9500] p-2 w-fit text-white rounded-md font-bold mt-4 transition duration-300 hover:scale-[1.1]"
             >
               Place Order
             </button>
           </form>
         ) : (
-          <button className="bg-[#FF9500] p-2 w-fit text-white rounded-md font-bold">
+          <button
+            onClick={handleOrder}
+            className="bg-[#FF9500] p-2 w-fit text-white rounded-md font-bold transition duration-300 hover:scale-[1.1]"
+          >
             Place Order
           </button>
         )}

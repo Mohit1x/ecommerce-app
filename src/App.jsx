@@ -9,6 +9,7 @@ import Whislist from "./components/Whislist";
 import Shipping from "./components/Shipping";
 import ShippingForm from "./components/ShippingForm";
 import PaymentMethod from "./components/PaymentMethod";
+import Orders from "./components/Orders";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
         {
           path: "/wishlist",
           element: <Whislist />,
+        },
+        {
+          path: "/orders",
+          element: <Orders />,
         },
         {
           path: "/shipping",

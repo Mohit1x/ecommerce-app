@@ -7,6 +7,7 @@ const AllProductsSlice = createSlice({
     cartProducts: [],
     wishListProducts: [],
     userData: [],
+    orderProducts: [],
     grandTotal: 0,
   },
   reducers: {
@@ -42,6 +43,13 @@ const AllProductsSlice = createSlice({
     addGrandTotal: (state, action) => {
       state.grandTotal = action.payload;
     },
+    addOrder: (state) => {
+      state.orderProducts = state.cartProducts;
+      state.cartProducts = [];
+    },
+    deleteOrders: (state) => {
+      state.orderProducts = [];
+    },
   },
 });
 
@@ -55,6 +63,8 @@ export const {
   deleteWishListProduct,
   addUserData,
   addGrandTotal,
+  addOrder,
+  deleteOrders,
 } = AllProductsSlice.actions;
 
 export default AllProductsSlice.reducer;

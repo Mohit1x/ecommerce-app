@@ -7,10 +7,12 @@ import {
 import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RiShoppingBag2Fill } from "react-icons/ri";
 
 const Header = () => {
   const cart = useSelector((store) => store.products.cartProducts);
   const wishList = useSelector((store) => store.products.wishListProducts);
+  const order = useSelector((store) => store.products.orderProducts);
 
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
@@ -19,7 +21,7 @@ const Header = () => {
       </Link>
       <div className="flex w-[400px] mr-56">
         <input
-          className="bg-[#2D3B47] border-2 border-[#455B6E] w-[100%] h-12 rounded-l-md placeholder:font-semibold"
+          className="bg-[#2D3B47] border-2 text-white focus:outline-none pl-2 border-[#455B6E] w-[100%] h-12 rounded-l-md placeholder:font-semibold"
           placeholder="  Search..."
         />
         <div className="bg-[#E99317] py-2 px-3 rounded-r-md">
@@ -28,6 +30,16 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-8 ">
+        <div className="flex items-center relative">
+          <Link to="/cart">
+            <BsCart2 className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
+          </Link>
+          {!!cart.length && (
+            <div className="bg-[#E99317] rounded-full w-6 flex items-center justify-center absolute -top-2 -right-3">
+              <p className="text-white font-semibold">{cart.length}</p>
+            </div>
+          )}
+        </div>
         <div className="relative">
           <Link to="/wishlist">
             <img
@@ -42,12 +54,12 @@ const Header = () => {
           )}
         </div>
         <div className="flex items-center relative">
-          <Link to="/cart">
-            <BsCart2 className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
+          <Link to="/orders">
+            <RiShoppingBag2Fill className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
           </Link>
-          {!!cart.length && (
+          {!!order.length && (
             <div className="bg-[#E99317] rounded-full w-6 flex items-center justify-center absolute -top-2 -right-3">
-              <p className="text-white font-semibold">{cart.length}</p>
+              <p className="text-white font-semibold">{order.length}</p>
             </div>
           )}
         </div>
