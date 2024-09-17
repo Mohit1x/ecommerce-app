@@ -6,7 +6,7 @@ import OrderShimmer from "./OrderShimmer";
 
 const Orders = () => {
   const orders = useSelector((store) => store.products.orderProducts);
-  console.log(orders.id);
+  console.log(orders);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

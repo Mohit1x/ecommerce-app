@@ -27,3 +27,6 @@ export const EMPTY_WISHLIST_SHIMMER =
 
 export const ORDER_SHIMMER_IMG =
   "https://shubho-amazon-clone.vercel.app/static/media/order-now.0e4d0d77826a37e2fc14.gif";
+
+export const AMAZON_FOOTER_IMG =
+  "https://shubho-amazon-clone.vercel.app/static/media/logo2.ba6c9d3900bb3bfc83bf.png";

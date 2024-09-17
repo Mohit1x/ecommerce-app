@@ -44,7 +44,8 @@ const AllProductsSlice = createSlice({
       state.grandTotal = action.payload;
     },
     addOrder: (state) => {
-      state.orderProducts = state.cartProducts;
+      console.log(state.cartProducts, state.orderProducts, "slice");
+      state.orderProducts = [...state.cartProducts, ...state.orderProducts];
       state.cartProducts = [];
     },
     deleteOrders: (state) => {
