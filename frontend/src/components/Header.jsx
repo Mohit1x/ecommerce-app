@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
-        <img className="w-[125px]" src={AMAZON_LOGO} />{" "}
+        <img className="w-[125px]" src={AMAZON_LOGO} id="header-logo" />
       </Link>
       <div className="flex w-[400px] mr-56">
         <input
@@ -32,7 +32,10 @@ const Header = () => {
       <div className="flex items-center gap-8 ">
         <div className="flex items-center relative">
           <Link to="/cart">
-            <BsCart2 className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
+            <BsCart2
+              id="cart"
+              className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer "
+            />
           </Link>
           {!!cart.length && (
             <div className="bg-[#E99317] rounded-full w-6 flex items-center justify-center absolute -top-2 -right-3">
@@ -43,6 +46,7 @@ const Header = () => {
         <div className="relative">
           <Link to="/wishlist">
             <img
+              id="header-heart-icon"
               className="w-[30px] h-[30px]  transition duration-300 hover:scale-[1.2] cursor-pointer"
               src={WHISHLIST_ICON}
             />
@@ -55,7 +59,10 @@ const Header = () => {
         </div>
         <div className="flex items-center relative">
           <Link to="/orders">
-            <RiShoppingBag2Fill className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer " />
+            <RiShoppingBag2Fill
+              id="order-bag"
+              className="text-white text-3xl  transition duration-300 hover:scale-[1.2] cursor-pointer "
+            />
           </Link>
           {!!order.length && (
             <div className="bg-[#E99317] rounded-full w-6 flex items-center justify-center absolute -top-2 -right-3">
@@ -64,7 +71,11 @@ const Header = () => {
           )}
         </div>
         <div className="border-2 rounded-full p-1">
-          <img className="w-9 h-9 cursor-pointer" src={USER_ICON} />
+          <img
+            className="w-9 h-9 cursor-pointer"
+            id="user-icon"
+            src={USER_ICON}
+          />
         </div>
       </div>
     </div>

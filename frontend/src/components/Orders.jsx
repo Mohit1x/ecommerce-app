@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteOrders } from "../redux slices/AllProductsSlice";
 import OrderShimmer from "./OrderShimmer";
+import { toast } from "sonner";
 
 const Orders = () => {
   const orders = useSelector((store) => store.products.orderProducts);
@@ -16,13 +17,14 @@ const Orders = () => {
 
   const handleDelete = () => {
     dispatch(deleteOrders());
+    toast.success("cleared orders data!");
   };
 
   if (orders.length === 0) {
     return <OrderShimmer />;
   }
   return (
-    <div className="grid cols-1 w-full items-center justify-center">
+    <div className="grid cols-1 w-full items-center justify-center mb-32">
       <div className="flex items-center gap-52 py-10">
         <h1 className="text-2xl font-bold">Your Orders</h1>
         <p
@@ -55,7 +57,7 @@ const Orders = () => {
                 className="w-10"
               />
               <p className="p-2 bg-green-500 shadow-2xl text-white font-semibold">
-                Ordered Sucessfully
+                Ordered Sucessfully!
               </p>
             </span>
           </div>

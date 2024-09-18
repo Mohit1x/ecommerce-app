@@ -10,6 +10,7 @@ import Shipping from "./components/Shipping";
 import ShippingForm from "./components/ShippingForm";
 import PaymentMethod from "./components/PaymentMethod";
 import Orders from "./components/Orders";
+import { Toaster } from "sonner";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -58,6 +59,7 @@ function App() {
   return (
     <div className="bg-[#F6F5F5] h-full">
       <Provider store={store}>
+        <Toaster />
         <RouterProvider router={appRouter} />
       </Provider>
     </div>

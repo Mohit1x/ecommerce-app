@@ -17,7 +17,7 @@ const ProductCard = ({ image, title, cat, ratings, price, id }) => {
   };
 
   return (
-    <div className="m-5 w-[260px]">
+    <div className="m-5 w-[260px]" id="product-card">
       <div
         onMouseEnter={() => setIsSHowing(true)}
         onMouseLeave={() => setIsSHowing(false)}
@@ -26,11 +26,13 @@ const ProductCard = ({ image, title, cat, ratings, price, id }) => {
         <span>
           {isClicked ? (
             <FaHeart
+              id="product-filled-heart-icon"
               onClick={handleWishCard}
               className="text-3xl transition duration-300 hover:scale-[1.2] cursor-pointer absolute top-3 right-3 fill-red-600"
             />
           ) : (
             <CiHeart
+              id="product-heart-icon"
               onClick={handleWishCard}
               className="text-3xl transition duration-300 hover:scale-[1.2] cursor-pointer absolute top-3 right-3"
             />

@@ -17,7 +17,6 @@ const Hero = ({ list, setList }) => {
     ref.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
-      // inline: "end",
     });
   };
 
@@ -27,8 +26,8 @@ const Hero = ({ list, setList }) => {
         <div className="flex flex-col gap-10 justify-center text-white">
           <p className="text-4xl font-bold font-sans"> Free Delivery!</p>
           <p className="w-[60%] text-xl font-sans">
-            {`Don't miss it out! Only today, get free`}{" "}
-            <span className="text-2xl font-bold">Next Day</span>{" "}
+            {`Don't miss it out! Only today, get free`}
+            <span className="text-2xl font-bold">Next Day</span>
             {`delivery on all
             your orders.`}
           </p>

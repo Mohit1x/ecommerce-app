@@ -10,6 +10,7 @@ import {
 } from "../redux slices/AllProductsSlice";
 import { CART_BG_IMG } from "../utils/constants";
 import SubTotal from "./SubTotal";
+import { toast } from "sonner";
 
 const Cart = () => {
   const cartProduct = useSelector((store) => store.products.cartProducts);
@@ -23,6 +24,11 @@ const Cart = () => {
   }, [cartProduct]);
 
   const dispatch = useDispatch();
+
+  const handleDelete = (index) => {
+    dispatch(deleteProduct(index));
+    toast.success("Product Removed!");
+  };
 
   if (!cartProduct.length)
     return (
@@ -85,7 +91,7 @@ const Cart = () => {
                         Save
                       </p>
                       <p
-                        onClick={() => dispatch(deleteProduct(index))}
+                        onClick={() => handleDelete(index)}
                         className="flex items-center"
                       >
                         <MdDelete className="transition duration-300 hover:scale-[1.20] text-[#B2B2B2] m-2 cursor-pointer text-2xl " />

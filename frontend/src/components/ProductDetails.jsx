@@ -5,6 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux slices/AllProductsSlice";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const [detail, setDetail] = useState({});
@@ -44,6 +45,7 @@ const ProductDetails = () => {
 
   const handleCart = () => {
     dispatch(addToCart({ ...detail, size: productSize[isSizeSelected] }));
+    toast.success("Added to cart!");
   };
 
   const handleBuyNow = () => {

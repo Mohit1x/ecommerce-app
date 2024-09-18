@@ -142,7 +142,7 @@ const ShippingForm = () => {
       </label>
       <button
         type="submit"
-        className="bg-blue-600 p-2 w-fit rounded-md text-white font-semibold py-2"
+        className="bg-[#E99317] w-fit rounded-md text-white font-semibold py-2 px-4"
       >
         Save
       </button>

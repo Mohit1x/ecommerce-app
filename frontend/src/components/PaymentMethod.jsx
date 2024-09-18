@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsFillCreditCardFill } from "react-icons/bs";
 import { addOrder } from "../redux slices/AllProductsSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const PaymentMethod = () => {
   const {
@@ -22,6 +23,7 @@ const PaymentMethod = () => {
 
   const handleOrder = () => {
     dispatch(addOrder());
+    toast.success("Order Placed Successfully!");
     navigate("/orders");
   };
 
@@ -30,7 +32,9 @@ const PaymentMethod = () => {
       <div className="grid grid-cols-1 shadow-2xl bg-white p-10 rounded-md gap-10">
         <h1 className="text-2xl font-bold">Payment Information</h1>
         <div className="flex flex-col gap-4">
-          <label className="text-md font-semibold">Name : {info.name}</label>
+          <label className="text-md font-semibold">
+            Name : <span>{info.name}</span>
+          </label>
           <label className="text-md font-semibold">
             Address : {info.address}, {info.pinCode}
           </label>
