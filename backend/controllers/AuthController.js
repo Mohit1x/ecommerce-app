@@ -94,4 +94,45 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const logout = async (req, res) => {
+  try {
+    res
+      .cookie("token", "", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
+        maxAge: 0,
+        expires: new Date(),
+      })
+      .status(200)
+      .json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Logout Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getMe = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "Not authenticated!" });
+    }
+
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decode.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.log("error at getMe :", error);
+    return res.status(500).json({ message: "Invalid or expired token" });
+  }
+};
+
+module.exports = { register, login, logout, getMe };
