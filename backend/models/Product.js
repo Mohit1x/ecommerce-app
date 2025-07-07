@@ -5,7 +5,7 @@ const reviewSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      requried: true,
+      required: true, // Fixed typo: "requried" -> "required"
     },
     comment: String,
     rating: {
@@ -26,11 +26,12 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
-      required: true,
+      public_id: { type: String, required: true },
+      url: { type: String, required: true },
     },
     description: {
       type: String,
+      required: true,
     },
     sizes: [{ type: String }],
     price: {
@@ -50,6 +51,7 @@ const productSchema = new mongoose.Schema(
     },
     category: {
       type: String,
+      default: "uncategorized",
     },
   },
   {

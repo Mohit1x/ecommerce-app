@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const { createProduct } = require("../controllers/productController");
-const requireAuth = require("../middlewares/authMiddleware");
-const requireAdmin = require("../middlewares/admin");
+const requireAuth = require("../middlewares/requireAuth");
+const requireAdmin = require("../middlewares/requireAdmin");
 const upload = require("../middlewares/upload");
 
+// Create product (Admin only)
 router.post(
   "/create",
   requireAuth,
