@@ -2,13 +2,6 @@ const Product = require("../models/Product");
 
 const createProduct = async (req, res) => {
   try {
-    console.log("=== Request Debug Info ===");
-    console.log("Request body:", JSON.stringify(req.body, null, 2));
-    console.log("Request file:", req.file);
-    console.log("Body keys:", Object.keys(req.body));
-    console.log("Body values:", Object.values(req.body));
-    console.log("========================");
-
     const { name, price, sizes, description, category, stock } = req.body;
 
     // Validate required fields
@@ -63,6 +56,20 @@ const createProduct = async (req, res) => {
   }
 };
 
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    res
+      .status(200)
+      .json({ message: "getting products successfully", products: products });
+  } catch (error) {
+    console.log("error getting all products", error);
+    res.status(500).json({ message: "server error", error });
+  }
+};
+
 module.exports = {
   createProduct,
+  getAllProducts,
 };
