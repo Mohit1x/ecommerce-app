@@ -69,7 +69,41 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "product id is required" });
+    }
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: "product with this id not found" });
+    }
+
+    res.status(200).json({ message: "prduct found successfully", product });
+  } catch (error) {
+    console.log("error getting product", error);
+    res.status(500).json({ message: "server error", error });
+  }
+};
+
+const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { name, price, sizes, description, category, stock } = req.body;
+  } catch (error) {
+    console.log("error updating product", error);
+    res.status(500).json({ message: "server error", error });
+  }
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
+  getProductById,
 };
