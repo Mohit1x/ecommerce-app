@@ -71,11 +71,13 @@ const Header = () => {
           )}
         </div>
         <div className="border-2 rounded-full p-1">
+         <Link to={"/auth"}>
           <img
             className="w-9 h-9 cursor-pointer"
             id="user-icon"
             src={USER_ICON}
           />
+         </Link>
         </div>
       </div>
     </div>

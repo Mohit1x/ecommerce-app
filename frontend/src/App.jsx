@@ -11,6 +11,7 @@ import ShippingForm from "./components/ShippingForm";
 import PaymentMethod from "./components/PaymentMethod";
 import Orders from "./components/Orders";
 import { Toaster } from "sonner";
+import AuthPage from "./components/auth/AuthPage";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -53,6 +54,10 @@ function App() {
           ],
         },
       ],
+    },
+    {
+      path: "/auth",
+      element: <AuthPage />,
     },
   ]);
 
