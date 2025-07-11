@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
   const [data, setData] = useState({ name: "", email: "", password: "" });
@@ -8,8 +9,32 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
     setData((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    console.log(data, "data");
+  const handleSubmit = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
+    if (tag === "Sign In") {
+      try {
+        const response = await axios.post(
+          `${apiUrl}/auth/login`,
+          {
+            email: data.email,
+            password: data.password,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await axios.post(`${apiUrl}/auth/register`, data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (

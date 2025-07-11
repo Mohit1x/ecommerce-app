@@ -4,7 +4,6 @@ const createProduct = async (req, res) => {
   try {
     const { name, price, sizes, description, category, stock } = req.body;
 
-    // Validate required fields
     if (!name || !price || !description) {
       return res.status(400).json({
         message: "Name, price, and description are required",
@@ -12,12 +11,10 @@ const createProduct = async (req, res) => {
       });
     }
 
-    // Validate image upload
     if (!req.file) {
       return res.status(400).json({ message: "Product image is required" });
     }
 
-    // Process sizes - handle both string and array
     let processedSizes = [];
     if (sizes) {
       if (typeof sizes === "string") {
@@ -27,7 +24,6 @@ const createProduct = async (req, res) => {
       }
     }
 
-    // Create product with Cloudinary image data
     const newProduct = await Product.create({
       name,
       price: Number(price),
@@ -36,8 +32,8 @@ const createProduct = async (req, res) => {
       category: category || "uncategorized",
       stock: Number(stock) || 0,
       image: {
-        public_id: req.file.filename, // Cloudinary public_id
-        url: req.file.path, // Cloudinary secure_url
+        public_id: req.file.filename,
+        url: req.file.path,
       },
       rating: 0,
       reviews: [],
@@ -95,20 +91,17 @@ const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Get the fields from body
     const { name, price, size, description, category, stock, image } = req.body;
 
     if (!id) {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
-    // Check if product exists
     const product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Update only if values are provided
     if (name) product.name = name;
     if (price) product.price = price;
     if (size) product.sizes = Array.isArray(size) ? size : size.split(",");
@@ -116,11 +109,7 @@ const updateProduct = async (req, res) => {
     if (category) product.category = category;
     if (stock !== undefined) product.stock = stock;
     if (image) {
-      // If you're sending a new image as base64 and want to re-upload to cloudinary:
       const cloudinary = require("../utils/cloudinary");
-
-      // Optional: delete old image from Cloudinary (if needed)
-      // await cloudinary.uploader.destroy(product.image.public_id);
 
       const uploadRes = await cloudinary.uploader.upload(image, {
         folder: "ecommerce",
