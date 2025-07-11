@@ -7,6 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const addressRoutes = require("./routes/addressRoutes");
 const productRoutes = require("./routes/productRoutes");
 
 connectDb();
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/address", addressRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "E-commerce API is running" });

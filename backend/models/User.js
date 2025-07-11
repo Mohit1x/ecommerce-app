@@ -31,15 +31,19 @@ const userSchema = mongoose.Schema(
         state: { type: String },
         postalCode: { type: String },
         country: { type: String },
-        isDefault: { type: Boolean, default: false },
+        isDefault: {
+          type: Boolean,
+          default: false,
+        },
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
       },
     ],
- 
+
     cart: [
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product", 
+          ref: "Product",
         },
         quantity: {
           type: Number,
