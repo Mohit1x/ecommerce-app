@@ -87,6 +87,32 @@ const getProductById = async (req, res) => {
   }
 };
 
+const getProductByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+
+    if (!category) {
+      return res.status(400).json({ message: "category is required" });
+    }
+
+    const products = await Product.find({ category });
+
+    if (!products) {
+      return res
+        .status(409)
+        .json({ message: "This category deos not hava any product" });
+    }
+
+    res.status(200).json({
+      message: `Fetched product with category ${category}`,
+      products,
+    });
+  } catch (error) {
+    console.log(error, "error getting product by categoty");
+    res.status(500).json({ message: "server error", error: error });
+  }
+};
+
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -157,6 +183,7 @@ module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
+  getProductByCategory,
   updateProduct,
   deleteProduct,
 };

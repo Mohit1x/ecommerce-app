@@ -6,6 +6,7 @@ const {
   createProduct,
   getAllProducts,
   getProductById,
+  getProductByCategory,
   deleteProduct,
 } = require("../controllers/productController");
 const requireAuth = require("../middlewares/requireAuth");
@@ -14,6 +15,7 @@ const upload = require("../middlewares/upload");
 
 router.get("/getAll", getAllProducts);
 router.get("/single/:id", getProductById);
+router.get("/byCategory/:category", getProductByCategory);
 
 // Create,update,delete product (Admin only)
 router.post(
