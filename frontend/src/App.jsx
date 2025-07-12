@@ -1,6 +1,5 @@
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import Body from "./components/Body";
-import store from "./redux slices/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
@@ -12,8 +11,16 @@ import PaymentMethod from "./components/PaymentMethod";
 import Orders from "./components/Orders";
 import { Toaster } from "sonner";
 import AuthPage from "./components/auth/AuthPage";
+import { useState } from "react";
+import { getMe } from "./redux slices/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useState(() => {
+    dispatch(getMe());
+  });
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -63,10 +70,8 @@ function App() {
 
   return (
     <div className="bg-[#F6F5F5] h-full">
-      <Provider store={store}>
-        <Toaster />
-        <RouterProvider router={appRouter} />
-      </Provider>
+      <Toaster />
+      <RouterProvider router={appRouter} />
     </div>
   );
 }

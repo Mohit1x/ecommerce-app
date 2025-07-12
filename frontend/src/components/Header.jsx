@@ -14,6 +14,12 @@ const Header = () => {
   const wishList = useSelector((store) => store.products.wishListProducts);
   const order = useSelector((store) => store.products.orderProducts);
 
+  const { user, isAuthenticated, isLoading } = useSelector(
+    (state) => state.auth || {}
+  );
+
+  console.log(user, "isauthenticated");
+
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
@@ -70,14 +76,18 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="border-2 rounded-full p-1">
-         <Link to={"/auth"}>
-          <img
-            className="w-9 h-9 cursor-pointer"
-            id="user-icon"
-            src={USER_ICON}
-          />
-         </Link>
+        <div className="border-2 rounded-full p-2">
+          {isAuthenticated ? (
+            <h1 className="text-white">{user?.name}</h1>
+          ) : (
+            <Link to={"/auth"}>
+              <img
+                className="w-9 h-9 cursor-pointer"
+                id="user-icon"
+                src={"/avatar.png"}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>

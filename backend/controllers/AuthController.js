@@ -82,8 +82,8 @@ const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
+        secure: false,
+        sameSite: "lax",
         maxAge: 24 * 60 * 60 * 1000,
       })
       .status(200)
@@ -99,8 +99,8 @@ const logout = async (req, res) => {
     res
       .cookie("token", "", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
+        secure: false,
+        sameSite: "lax",
         maxAge: 0,
         expires: new Date(),
       })
