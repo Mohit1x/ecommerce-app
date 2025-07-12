@@ -1,8 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
   const [data, setData] = useState({ name: "", email: "", password: "" });
+
+  const navigate = useNavigate();
 
   const handleOnChange = (field, event) => {
     const value = event.target.value;
@@ -24,6 +27,8 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
           }
         );
         console.log(response);
+
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
@@ -37,6 +42,12 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
     }
   };
 
+  const inputConfig = {
+    name: { type: "text", autoComplete: "name" },
+    password: { type: "password", autoComplete: "current-password" },
+    email: { type: "email", autoComplete: "email" },
+  };
+
   return (
     <div className="auth-form space-y-5">
       <h1 className="text-2xl font-bold">{tag}</h1>
@@ -45,7 +56,8 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
         {label.map((item, idx) => (
           <input
             key={idx}
-            type="text"
+            type={inputConfig[item]?.type || "text"}
+            autoComplete={inputConfig[item]?.autoComplete}
             placeholder={item}
             className="w-full bg-[#EEEEEE] placeholder:text-[#808080] placeholder:text-sm p-2 rounded-lg placeholder:capitalize outline-none"
             value={data[item]}

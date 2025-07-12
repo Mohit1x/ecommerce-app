@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthComponentCard from "./AuthComponentCard";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthCard = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   return (
     <div className="auth-container">
       <div className={`auth-card ${isSignUp ? "right-panel-active" : ""}`}>
