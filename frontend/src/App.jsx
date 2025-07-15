@@ -18,6 +18,7 @@ import { Toaster } from "sonner";
 import AuthPage from "./components/auth/AuthPage";
 import { useState } from "react";
 import { getMe } from "./redux slices/authSlice";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,10 @@ function App() {
               element: <PaymentMethod />,
             },
           ],
+        },
+        {
+          path: "/profile",
+          element: <ProfileContainer />,
         },
       ],
     },
