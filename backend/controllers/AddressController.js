@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const addAddress = async (req, res) => {
   try {
-    const { street, city, state, postalCode, country, isDefault } = req.body;
+    const { name,street, city, state, postalCode, country, isDefault } = req.body;
     const { userId } = req.user;
 
     if (!street || !city || !state || !postalCode || !country) {
@@ -16,7 +16,7 @@ const addAddress = async (req, res) => {
         add.isDefault = false;
       });
     }
-    user.address.push({ street, city, state, postalCode, country, isDefault });
+    user.address.push({ name,street, city, state, postalCode, country, isDefault });
     await user.save();
 
     res

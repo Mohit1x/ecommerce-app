@@ -3,18 +3,21 @@ import Footer from "./Footer";
 import { Outlet, useNavigate } from "react-router-dom";
 import ScrollToTop from "../utils/ScrollToTop";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const Body = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth || {});
+  const { isLoading } = useSelector(
+    (state) => state.auth || {}
+  );
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/auth");
-    }
-  }, [isAuthenticated, navigate]);
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <h1 className="text-2xl font-bold">Loading.....</h1>
+      </div>
+    );
+  }
   return (
     <div className="h-full">
       <Header />
