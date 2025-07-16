@@ -1,19 +1,38 @@
 import { useSelector } from "react-redux";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { useState } from "react";
+import ProfileModel from "../models/ProfileModel";
 
 const ProfileContainer = () => {
+  const [openModel, setOpenModel] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
   const { user } = useSelector((state) => state.auth || {});
 
   console.log(user);
+
+  const profileData = {
+    name: user?.name,
+    email: user?.email,
+  };
 
   return (
     <div className="md:h-[100vh] w-full bg-[#F5F5F5]">
       <div className="flex flex-col gap-10 h-full w-full py-5 px-5 md:py-10 md:px-20">
         <h1 className="text-xl font-semibold">Profile</h1>
         <div className="bg-[#FFFFFF] w-full p-5 rounded-xl flex flex-col gap-5">
-          <div className="flex items-center space-x-5">
+          <div className="flex items-center gap-5">
             <h1 className="text-sm font-semibold">{user?.name}</h1>
-            <MdOutlineModeEdit className="text-blue-400 cursor-pointer" />
+            <MdOutlineModeEdit
+              className="text-blue-400 cursor-pointer"
+              onClick={() => setOpenModel(true)}
+            />
+            {openModel && (
+              <ProfileModel
+                model={"info"}
+                onClose={() => setOpenModel(false)}
+                data={profileData}
+              />
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <h1 className="text-[#707070] text-sm">Email</h1>
@@ -21,7 +40,7 @@ const ProfileContainer = () => {
           </div>
         </div>
         <div className="bg-[#FFFFFF] w-full p-5 rounded-xl flex flex-col gap-5">
-          <div className="flex items-center space-x-5">
+          <div className="flex items-center gap-5">
             <h1 className="text-md font-semibold">Addresses</h1>
             <button className="text-blue-500">+ Add</button>
           </div>
@@ -47,7 +66,17 @@ const ProfileContainer = () => {
                   <h1 className="capitalize">{add?.country}</h1>
                 </div>
                 <div>
-                  <MdOutlineModeEdit className="text-blue-400" />
+                  <MdOutlineModeEdit
+                    className="text-blue-400"
+                    onClick={() => setEditingIndex(idx)}
+                  />
+                  {editingIndex === idx && (
+                    <ProfileModel
+                      model={"address"}
+                      onClose={() => setEditingIndex(null)}
+                      data={add}
+                    />
+                  )}
                 </div>
               </div>
             ))}
