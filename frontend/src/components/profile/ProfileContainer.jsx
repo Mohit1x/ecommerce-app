@@ -6,9 +6,8 @@ import ProfileModel from "../models/ProfileModel";
 const ProfileContainer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [addAddress, setAddAddress] = useState(false);
   const { user } = useSelector((state) => state.auth || {});
-
-  console.log(user);
 
   const profileData = {
     name: user?.name,
@@ -16,7 +15,7 @@ const ProfileContainer = () => {
   };
 
   return (
-    <div className="md:h-[100vh] w-full bg-[#F5F5F5]">
+    <div className="w-full bg-[#F5F5F5]">
       <div className="flex flex-col gap-10 h-full w-full py-5 px-5 md:py-10 md:px-20">
         <h1 className="text-xl font-semibold">Profile</h1>
         <div className="bg-[#FFFFFF] w-full p-5 rounded-xl flex flex-col gap-5">
@@ -31,6 +30,7 @@ const ProfileContainer = () => {
                 model={"info"}
                 onClose={() => setOpenModel(false)}
                 data={profileData}
+                variant="info-edit"
               />
             )}
           </div>
@@ -42,13 +42,26 @@ const ProfileContainer = () => {
         <div className="bg-[#FFFFFF] w-full p-5 rounded-xl flex flex-col gap-5">
           <div className="flex items-center gap-5">
             <h1 className="text-md font-semibold">Addresses</h1>
-            <button className="text-blue-500">+ Add</button>
+            <button
+              className="text-blue-500 text-sm font-semibold"
+              onClick={() => setAddAddress(true)}
+            >
+              + Add
+            </button>
+            {addAddress && (
+              <ProfileModel
+                model={"address"}
+                onClose={() => setAddAddress(false)}
+                variant="create"
+              />
+            )}
           </div>
-          <div className="w-full flex flex-col md:flex-row items-center gap-5">
+          <div className="w-full grid grid-cols md:grid-cols-2 lg:grid-cols-4 xl:grid grid-cols-5 gap-6">
             {user?.address.map((add, idx) => (
               <div
                 key={idx}
-                className="flex flex-wrap justify-between gap-2 hover:bg-[#F5F5F5] text-sm p-2 rounded w-[300px] cursor-pointer"
+                className="flex justify-between gap-2 hover:bg-[#F5F5F5] text-sm p-2 rounded w-[250px] cursor-pointer"
+                onClick={() => setEditingIndex(idx)}
               >
                 <div className="flex flex-col items-start">
                   {add?.isDefault && (
@@ -66,15 +79,13 @@ const ProfileContainer = () => {
                   <h1 className="capitalize">{add?.country}</h1>
                 </div>
                 <div>
-                  <MdOutlineModeEdit
-                    className="text-blue-400"
-                    onClick={() => setEditingIndex(idx)}
-                  />
+                  <MdOutlineModeEdit className="text-blue-400" />
                   {editingIndex === idx && (
                     <ProfileModel
                       model={"address"}
                       onClose={() => setEditingIndex(null)}
                       data={add}
+                      variant="edit"
                     />
                   )}
                 </div>

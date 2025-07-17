@@ -1,7 +1,17 @@
-const AddressModel = () => {
+import { Edit } from "../address-form/Edit";
+import { AddAddress } from "../address-form/AddAddress";
+
+const AddressModel = ({ data, onClose, variant }) => {
+  console.log(variant);
+  const addressForms = {
+    edit: Edit,
+    create: AddAddress,
+  };
+
+  const SelectedVarient = addressForms[variant];
   return (
     <div>
-      <h1>Address model</h1>
+      <SelectedVarient data={data} onClose={onClose} />
     </div>
   );
 };

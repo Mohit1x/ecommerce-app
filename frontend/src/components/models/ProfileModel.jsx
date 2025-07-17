@@ -1,7 +1,7 @@
 import AddressModel from "./AddressModel";
 import InfoModel from "./InfoModel";
 
-const ProfileModel = ({ onClose, model, data }) => {
+const ProfileModel = ({ onClose, model, data, variant }) => {
   const allModels = {
     info: InfoModel,
     address: AddressModel,
@@ -18,7 +18,7 @@ const ProfileModel = ({ onClose, model, data }) => {
         onClick={(e) => e.stopPropagation()}
         className="w-[50%] bg-white rounded p-4 shadow-lg"
       >
-        <SelectedModel data={data} onClose={onClose} />
+        <SelectedModel data={data} onClose={onClose} variant={variant} />
       </div>
     </div>
   );

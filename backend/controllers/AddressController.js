@@ -1,9 +1,9 @@
-const { urlencoded } = require("express");
 const User = require("../models/User");
 
 const addAddress = async (req, res) => {
   try {
-    const { name,street, city, state, postalCode, country, isDefault } = req.body;
+    const { name, street, city, state, postalCode, country, isDefault } =
+      req.body;
     const { userId } = req.user;
 
     if (!street || !city || !state || !postalCode || !country) {
@@ -16,7 +16,15 @@ const addAddress = async (req, res) => {
         add.isDefault = false;
       });
     }
-    user.address.push({ name,street, city, state, postalCode, country, isDefault });
+    user.address.push({
+      name,
+      street,
+      city,
+      state,
+      postalCode,
+      country,
+      isDefault,
+    });
     await user.save();
 
     res
@@ -89,12 +97,10 @@ const deleteAddress = async (req, res) => {
     user.address = user.address.filter((add) => add._id.toString() !== id);
 
     await user.save();
-    res
-      .status(200)
-      .json({
-        message: "Address deleted successfully",
-        addresses: user.address,
-      });
+    res.status(200).json({
+      message: "Address deleted successfully",
+      addresses: user.address,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "server error", error: error });
