@@ -8,17 +8,21 @@ import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RiShoppingBag2Fill } from "react-icons/ri";
+import { useState } from "react";
+import { ProfileDropDown } from "./drop-downs/ProfileDropDown";
 
 const Header = () => {
   const cart = useSelector((store) => store.products.cartProducts);
   const wishList = useSelector((store) => store.products.wishListProducts);
   const order = useSelector((store) => store.products.orderProducts);
 
+  const [showProfileDropDown, setShowProfileDropDown] = useState(false);
+
   const { user, isAuthenticated, isLoading } = useSelector(
     (state) => state.auth || {}
   );
 
-  console.log(user, "isauthenticated");
+  const userName = user?.name;
 
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
@@ -76,10 +80,25 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="border-2 rounded-full p-2">
-          {isAuthenticated ? (
-            <h1 className="text-white">{user?.name}</h1>
-          ) : (
+
+        {isAuthenticated ? (
+          <div
+            className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800 cursor-pointer relative"
+            onMouseEnter={() => setShowProfileDropDown(true)}
+            onMouseLeave={() => setShowProfileDropDown(false)}
+          >
+            <h1 className="text-white">{userName[0]}</h1>
+            {showProfileDropDown && (
+              <div className="absolute top-10 right-0">
+                <ProfileDropDown
+                  setShowProfileDropDown={setShowProfileDropDown}
+                  user={user}
+                />
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800">
             <Link to={"/auth"}>
               <img
                 className="w-9 h-9 cursor-pointer"
@@ -87,8 +106,8 @@ const Header = () => {
                 src={"/avatar.png"}
               />
             </Link>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
