@@ -15,13 +15,27 @@ export const Edit = ({ onClose, data }) => {
   });
   const dispatch = useDispatch();
 
-  const handleSubmit = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
+  const handleSubmit = async () => {
     try {
       const response = await axios.put(
         `${apiUrl}/address/update/${data._id}`,
         { ...formData },
+        { withCredentials: true }
+      );
+      console.log(response);
+      dispatch(getMe());
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/address/delete/${data._id}`,
         { withCredentials: true }
       );
       console.log(response);
@@ -135,19 +149,26 @@ export const Edit = ({ onClose, data }) => {
           </div>
         </div>
       </div>
-      <div className="self-end flex items-center gap-2">
-        <button
-          className="text-sm text-[#105989] underline"
-          onClick={() => onClose()}
-        >
-          Cancel
-        </button>
-        <button
-          className="text-sm font-semibold bg-[#105989] rounded-md text-white px-4 py-2"
-          onClick={handleSubmit}
-        >
-          Save
-        </button>
+      <div className="flex items-center justify-between w-full">
+        <div>
+          <button onClick={handleDelete} className="text-red-500">
+            Delete
+          </button>
+        </div>
+        <div className="self-end flex items-center gap-2">
+          <button
+            className="text-sm text-[#105989] underline"
+            onClick={() => onClose()}
+          >
+            Cancel
+          </button>
+          <button
+            className="text-sm font-semibold bg-[#105989] rounded-md text-white px-4 py-2"
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
