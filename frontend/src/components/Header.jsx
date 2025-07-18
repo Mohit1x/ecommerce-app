@@ -8,7 +8,7 @@ import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RiShoppingBag2Fill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProfileDropDown } from "./drop-downs/ProfileDropDown";
 
 const Header = () => {
@@ -82,20 +82,21 @@ const Header = () => {
         </div>
 
         {isAuthenticated ? (
-          <div
-            className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800 cursor-pointer relative"
-            onMouseEnter={() => setShowProfileDropDown(true)}
-            onMouseLeave={() => setShowProfileDropDown(false)}
-          >
-            <h1 className="text-white">{userName[0]}</h1>
-            {showProfileDropDown && (
-              <div className="absolute top-10 right-0">
-                <ProfileDropDown
-                  setShowProfileDropDown={setShowProfileDropDown}
-                  user={user}
-                />
-              </div>
-            )}
+          <div className="relative">
+            <div
+              className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800 cursor-pointer"
+              onClick={() => setShowProfileDropDown(!showProfileDropDown)}
+            >
+              <h1 className="text-white">{userName[0]}</h1>
+              {showProfileDropDown && (
+                <div className="absolute top-10 right-0">
+                  <ProfileDropDown
+                    setShowProfileDropDown={setShowProfileDropDown}
+                    user={user}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         ) : (
           <div className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800">

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getMe } from "../../redux slices/authSlice";
 
 const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
   const [data, setData] = useState({ name: "", email: "", password: "" });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOnChange = (field, event) => {
     const value = event.target.value;
@@ -27,6 +30,7 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
           }
         );
         console.log(response);
+        dispatch(getMe());
 
         navigate("/");
       } catch (error) {

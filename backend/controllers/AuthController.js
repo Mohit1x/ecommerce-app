@@ -99,8 +99,8 @@ const logout = async (req, res) => {
     res
       .cookie("token", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
         maxAge: 0,
         expires: new Date(),
       })
