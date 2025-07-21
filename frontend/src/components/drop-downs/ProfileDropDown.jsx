@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { IoIosLogOut } from "react-icons/io";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,8 @@ export const ProfileDropDown = ({ setShowProfileDropDown, user }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      event.stopPropagation();
+
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowProfileDropDown(false);
       }
@@ -46,7 +48,7 @@ export const ProfileDropDown = ({ setShowProfileDropDown, user }) => {
 
   return (
     <div
-      className="bg-white text-black p-5 flex flex-col gap-4 rounded-xl"
+      className="bg-white text-black p-5 flex flex-col gap-4 rounded-xl cursor-default"
       onMouseEnter={() => setShowProfileDropDown(true)}
       ref={dropdownRef}
     >

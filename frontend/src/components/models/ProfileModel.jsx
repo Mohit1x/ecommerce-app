@@ -12,7 +12,7 @@ const ProfileModel = ({ onClose, model, data, variant }) => {
   return (
     <div
       className="fixed inset-0 bg-gray-900/60 flex items-center justify-center z-50 transition-all duration-300"
-      onClick={() => onClose()}
+      onClick={(e) => onClose(e)}
     >
       <div
         onClick={(e) => e.stopPropagation()}

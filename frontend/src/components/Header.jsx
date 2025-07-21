@@ -85,7 +85,7 @@ const Header = () => {
           <div className="relative">
             <div
               className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800 cursor-pointer"
-              onClick={() => setShowProfileDropDown(!showProfileDropDown)}
+              onClick={() => setShowProfileDropDown(true)}
             >
               <h1 className="text-white">{userName[0]}</h1>
               {showProfileDropDown && (

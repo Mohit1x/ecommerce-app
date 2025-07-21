@@ -11,7 +11,7 @@ const AddressModel = ({ data, onClose, variant }) => {
   const SelectedVarient = addressForms[variant];
   return (
     <div>
-      <SelectedVarient data={data} onClose={onClose} />
+      <SelectedVarient data={data} onClose={(e) => onClose(e)} />
     </div>
   );
 };

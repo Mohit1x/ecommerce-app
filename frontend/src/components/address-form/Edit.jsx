@@ -46,6 +46,11 @@ export const Edit = ({ onClose, data }) => {
     }
   };
 
+  const handleClose = (event) => {
+    event.stopPropagation();
+    onClose(event);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-xl font-semibold">Create Address</h1>
@@ -158,7 +163,7 @@ export const Edit = ({ onClose, data }) => {
         <div className="self-end flex items-center gap-2">
           <button
             className="text-sm text-[#105989] underline"
-            onClick={() => onClose()}
+            onClick={(e) => handleClose(e)}
           >
             Cancel
           </button>

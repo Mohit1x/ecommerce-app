@@ -14,6 +14,13 @@ const ProfileContainer = () => {
     email: user?.email,
   };
 
+  console.log(editingIndex, "editing index");
+
+  const handleClose = (event) => {
+    event.stopPropagation();
+    setEditingIndex(null);
+  };
+
   return (
     <div className="w-full bg-[#F5F5F5]">
       <div className="flex flex-col gap-10 h-full w-full py-5 px-5 md:py-10 md:px-20">
@@ -83,7 +90,7 @@ const ProfileContainer = () => {
                   {editingIndex === idx && (
                     <ProfileModel
                       model={"address"}
-                      onClose={() => setEditingIndex(null)}
+                      onClose={(e) => handleClose(e)}
                       data={add}
                       variant="edit"
                     />

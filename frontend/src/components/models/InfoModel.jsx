@@ -47,7 +47,12 @@ const InfoModel = ({ data, onClose }) => {
         </div>
       </div>
       <div className="self-end flex items-center gap-2">
-        <button className="text-sm text-[#105989] underline">Cancel</button>
+        <button
+          className="text-sm text-[#105989] underline"
+          onClick={() => onClose()}
+        >
+          Cancel
+        </button>
         <button
           className="text-sm font-semibold bg-[#105989] rounded-md text-white px-4 py-2"
           onClick={handleSubmit}
