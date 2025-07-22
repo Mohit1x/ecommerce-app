@@ -25,7 +25,7 @@ const AuthCard = () => {
             label={["name", "email", "password"]}
             buttonText="Sign Up"
             toggleButtonText="Sign In"
-            onToggle={() => setIsSignUp(false)}
+            setIsSignUp={setIsSignUp}
           />
         </div>
         <div className="form-container sign-in-container">
@@ -35,7 +35,7 @@ const AuthCard = () => {
             label={["email", "password"]}
             buttonText="Sign In"
             toggleButtonText="Sign Up"
-            onToggle={() => setIsSignUp(true)}
+            setIsSignUp={setIsSignUp}
           />
         </div>
         <div className="overlay-container">

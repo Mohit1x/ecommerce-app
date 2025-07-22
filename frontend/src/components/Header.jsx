@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RiShoppingBag2Fill } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
 import { ProfileDropDown } from "./drop-downs/ProfileDropDown";
+import { CiUser } from "react-icons/ci";
 
 const Header = () => {
   const cart = useSelector((store) => store.products.cartProducts);
@@ -101,11 +102,7 @@ const Header = () => {
         ) : (
           <div className="w-10 h-10 border-2 rounded-full p-1 flex items-center justify-center bg-gray-800">
             <Link to={"/auth"}>
-              <img
-                className="w-9 h-9 cursor-pointer"
-                id="user-icon"
-                src={"/avatar.png"}
-              />
+              <CiUser size={24} color="white" />
             </Link>
           </div>
         )}

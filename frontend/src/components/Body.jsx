@@ -5,21 +5,19 @@ import ScrollToTop from "../utils/ScrollToTop";
 import { useSelector } from "react-redux";
 
 const Body = () => {
-  const { isLoading } = useSelector(
-    (state) => state.auth || {}
-  );
+  const { isLoading } = useSelector((state) => state.auth || {});
 
   const navigate = useNavigate();
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         <h1 className="text-2xl font-bold">Loading.....</h1>
       </div>
     );
   }
   return (
-    <div className="h-full">
+    <div className="min-h-screen">
       <Header />
       <main className="mt-[100px]">
         <ScrollToTop />

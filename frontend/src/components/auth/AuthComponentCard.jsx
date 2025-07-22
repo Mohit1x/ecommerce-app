@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getMe } from "../../redux slices/authSlice";
 
-const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
+const AuthComponentCard = ({ tag, desc, label, buttonText, setIsSignUp }) => {
   const [data, setData] = useState({ name: "", email: "", password: "" });
 
   const navigate = useNavigate();
@@ -40,6 +40,7 @@ const AuthComponentCard = ({ tag, desc, label, buttonText }) => {
       try {
         const response = await axios.post(`${apiUrl}/auth/register`, data);
         console.log(response);
+        setIsSignUp(false);
       } catch (error) {
         console.log(error);
       }

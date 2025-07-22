@@ -9,5 +9,3 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
-
-// bg-gradient-to-tr from-[#131B4F] via-[#543BA1] to-[#CED8FA]

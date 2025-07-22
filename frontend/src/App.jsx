@@ -19,6 +19,7 @@ import AuthPage from "./components/auth/AuthPage";
 import { useState } from "react";
 import { getMe } from "./redux slices/authSlice";
 import ProfileContainer from "./components/profile/ProfileContainer";
+import AddProduct from "./components/admin-product-features/AddProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -70,6 +71,10 @@ function App() {
           path: "/profile",
           element: <ProfileContainer />,
         },
+        {
+          path: "/admin-add-product",
+          element: <AddProduct />,
+        },
       ],
     },
     {
@@ -79,7 +84,7 @@ function App() {
   ]);
 
   return (
-    <div className="bg-[#F6F5F5] h-full">
+    <div className="bg-[#F6F5F5]">
       <Toaster />
       <RouterProvider router={appRouter} />
     </div>

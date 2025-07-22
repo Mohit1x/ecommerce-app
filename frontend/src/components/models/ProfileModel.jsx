@@ -11,7 +11,7 @@ const ProfileModel = ({ onClose, model, data, variant }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-gray-900/60 flex items-center justify-center z-50 transition-all duration-300"
+      className="fixed inset-0 bg-gray-900/60 flex items-center justify-center z-50 transition-all duration-300 cursor-default"
       onClick={(e) => onClose(e)}
     >
       <div

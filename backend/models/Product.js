@@ -25,10 +25,12 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      public_id: { type: String, required: true },
-      url: { type: String, required: true },
-    },
+    images: [
+      {
+        public_id: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+    ],
     description: {
       type: String,
       required: true,
@@ -38,12 +40,6 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    rating: {
-      type: Number,
-      default: 0,
-      min: 0,
-      max: 5,
-    },
     reviews: [reviewSchema],
     stock: {
       type: Number,
@@ -52,6 +48,12 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       default: "uncategorized",
+    },
+    averageRating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5,
     },
   },
   {

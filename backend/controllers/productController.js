@@ -11,8 +11,14 @@ const createProduct = async (req, res) => {
       });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ message: "Product image is required" });
+    if (!req.files || req.files.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "At least one product image is required" });
+    }
+
+    if (req.files.length > 5) {
+      return res.status(400).json({ message: "Maximum 5 images are allowed" });
     }
 
     let processedSizes = [];

@@ -1,11 +1,12 @@
 import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { FaRegUser } from "react-icons/fa6";
-import { IoIosLogOut } from "react-icons/io";
+import { LuLogOut } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import { getMe } from "../../redux slices/authSlice";
+import { IoMdAdd } from "react-icons/io";
 
 export const ProfileDropDown = ({ setShowProfileDropDown, user }) => {
   const firstName = user?.name.split(" ")[0];
@@ -58,6 +59,16 @@ export const ProfileDropDown = ({ setShowProfileDropDown, user }) => {
         </h1>
         <h1 className="text-sm text-[#918d8d] font-[400]">{user?.email}</h1>
       </div>
+      {user?.role === "admin" && (
+        <Link to={"/admin-add-product"}>
+          <div className="w-full bg-zinc-700 text-gray-200 hover:bg-white hover:text-zinc-700 cursor-pointer flex items-center justify-center gap-4 py-3 rounded-xl font-semibold border border-gray-200">
+            <span>
+              <IoMdAdd size={24} />
+            </span>
+            <h1>Add Product</h1>
+          </div>
+        </Link>
+      )}
       <div className="flex items-center gap-4">
         <Link to={"/profile"}>
           <button className="flex items-center gap-2 bg-[#F0F0F0] px-10 py-2 font-medium rounded-xl border border-gray-200 hover:text-white hover:bg-zinc-700 group">
@@ -74,7 +85,7 @@ export const ProfileDropDown = ({ setShowProfileDropDown, user }) => {
           className="flex items-center gap-2 bg-[#F0F0F0] px-10 py-2 font-medium rounded-xl border border-gray-200 hover:bg-zinc-700 group"
           onClick={handleLogOut}
         >
-          <IoIosLogOut
+          <LuLogOut
             size={18}
             className="text-gray-800 group-hover:text-white"
           />
