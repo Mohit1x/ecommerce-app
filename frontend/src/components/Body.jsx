@@ -17,9 +17,9 @@ const Body = () => {
     );
   }
   return (
-    <div className="min-h-screen">
+    <div className="h-full">
       <Header />
-      <main className="mt-[100px]">
+      <main className="mt-[100px] min-h-screen">
         <ScrollToTop />
         <Outlet />
       </main>

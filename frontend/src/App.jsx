@@ -1,11 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Body from "./components/Body";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-  useNavigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
@@ -84,7 +79,7 @@ function App() {
   ]);
 
   return (
-    <div className="bg-[#F6F5F5]">
+    <div className="bg-[#F6F5F5] h-full">
       <Toaster />
       <RouterProvider router={appRouter} />
     </div>
