@@ -22,7 +22,7 @@ router.post(
   "/create",
   requireAuth,
   requireAdmin,
-  upload.array("images", 5),
+  upload.array("images", 4),
   createProduct
 );
 router.put("/update/:id", requireAuth, requireAdmin, updateProduct);
