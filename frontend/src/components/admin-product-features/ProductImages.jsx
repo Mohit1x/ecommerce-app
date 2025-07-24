@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd, IoMdRemove } from "react-icons/io";
 
 export const ProductImages = () => {
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [preview, setPreview] = useState(null);
   const [base64, setBase64] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [showRemove, setShowRemove] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const [allProductImages, setAllProductImages] = useState([]);
 
@@ -59,13 +60,20 @@ export const ProductImages = () => {
               {allProductImages?.map((images, index) => (
                 <div
                   onClick={() => setSelectedImage(index)}
-                  className={`overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#EFEFEF] rounded-xl ${
+                  onMouseEnter={() => setShowRemove(index)}
+                  onMouseLeave={() => setShowRemove(null)}
+                  className={`overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#EFEFEF] rounded-xl hover:bg-gray-300 relative ${
                     index == selectedImage
                       ? "border border-gray-500 rounded-xl"
                       : ""
                   }`}
                 >
                   <img src={images} className="h-full object-cover" />
+                  {showRemove === index && (
+                    <div className="bg-white rounded absolute h-[20px] w-[20px] right-1 top-1 text-red-400 flex items-center justify-center cursor-pointer">
+                      <IoMdRemove size={16} />
+                    </div>
+                  )}
                 </div>
               ))}
               {allProductImages.length !== 4 && (
