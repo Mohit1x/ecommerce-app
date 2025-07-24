@@ -25,6 +25,13 @@ export const ProductImages = () => {
     }
   };
 
+  const handleRemoveImg = (indexToRemove) => {
+    setAllProductImages((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
+    setSelectedImage(selectedImage - 1);
+  };
+
   return (
     <div className="h-full">
       <div className="flex flex-col gap-2 h-full p-2 bg-[#F9F9F9] rounded-xl">
@@ -70,7 +77,10 @@ export const ProductImages = () => {
                 >
                   <img src={images} className="h-full object-cover" />
                   {showRemove === index && (
-                    <div className="bg-white rounded absolute h-[20px] w-[20px] right-1 top-1 text-red-400 flex items-center justify-center cursor-pointer">
+                    <div
+                      onClick={() => handleRemoveImg(index)}
+                      className="bg-white rounded absolute h-[20px] w-[20px] right-1 top-1 text-red-400 flex items-center justify-center cursor-pointer"
+                    >
                       <IoMdRemove size={16} />
                     </div>
                   )}
