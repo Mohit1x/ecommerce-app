@@ -7,6 +7,8 @@ export const ProductImages = () => {
   const [showRemove, setShowRemove] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
 
+  console.log(selectedImage, "selected image index");
+
   const [allProductImages, setAllProductImages] = useState([]);
 
   const handleFileChange = (e) => {
@@ -18,18 +20,29 @@ export const ProductImages = () => {
         setPreview(reader.result);
         setBase64(reader.result);
         setAllProductImages((prev) => [...prev, reader.result]);
-        console.log("Base64 string:", reader.result);
       };
 
       reader.readAsDataURL(file);
     }
   };
-
   const handleRemoveImg = (indexToRemove) => {
-    setAllProductImages((prev) =>
-      prev.filter((_, index) => index !== indexToRemove)
-    );
-    setSelectedImage(selectedImage - 1);
+    setAllProductImages((prevImages) => {
+      const newImages = prevImages.filter(
+        (_, index) => index !== indexToRemove
+      );
+
+      setSelectedImage((prevSelected) => {
+        if (prevSelected === indexToRemove) {
+          return Math.max(0, prevSelected - 1);
+        }
+        if (prevSelected > indexToRemove) {
+          return prevSelected - 1;
+        }
+        return prevSelected;
+      });
+
+      return newImages;
+    });
   };
 
   return (
@@ -45,7 +58,7 @@ export const ProductImages = () => {
                 className="h-full w-full object-contain"
               />
             ) : (
-              <div className="overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#e4f3ed] rounded-xl">
+              <div className="overflow-hidden min-h-[300px] w-full mx-auto flex items-center justify-center bg-[#e4f3ed] rounded-xl">
                 <label
                   htmlFor="file-upload"
                   className="p-1 rounded-full bg-green-400 text-white cursor-pointer"
