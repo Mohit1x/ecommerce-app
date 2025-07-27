@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 
-export const ProductImages = () => {
+export const ProductImages = ({ setData }) => {
   const [base64, setBase64] = useState(null);
   const [preview, setPreview] = useState(null);
   const [showRemove, setShowRemove] = useState(null);
@@ -24,6 +24,8 @@ export const ProductImages = () => {
 
       reader.readAsDataURL(file);
     }
+
+    setData((prev) => ({ ...prev, images: allProductImages }));
   };
   const handleRemoveImg = (indexToRemove) => {
     setAllProductImages((prevImages) => {

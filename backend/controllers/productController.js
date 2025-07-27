@@ -2,7 +2,8 @@ const Product = require("../models/Product");
 
 const createProduct = async (req, res) => {
   try {
-    const { name, price, sizes, description, category, stock } = req.body;
+    const { name, price, compareAtPrice, sizes, description, category, stock } =
+      req.body;
 
     if (!name || !price || !description) {
       return res.status(400).json({
@@ -33,6 +34,7 @@ const createProduct = async (req, res) => {
     const newProduct = await Product.create({
       name,
       price: Number(price),
+      compareAtPrice: Number(compareAtPrice),
       sizes: processedSizes,
       description,
       category: category || "uncategorized",
@@ -123,7 +125,16 @@ const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { name, price, size, description, category, stock, image } = req.body;
+    const {
+      name,
+      price,
+      compareAtPrice,
+      size,
+      description,
+      category,
+      stock,
+      image,
+    } = req.body;
 
     if (!id) {
       return res.status(400).json({ message: "Product ID is required" });
@@ -136,6 +147,7 @@ const updateProduct = async (req, res) => {
 
     if (name) product.name = name;
     if (price) product.price = price;
+    if (compareAtPrice) product.compareAtPrice = compareAtPrice;
     if (size) product.sizes = Array.isArray(size) ? size : size.split(",");
     if (description) product.description = description;
     if (category) product.category = category;

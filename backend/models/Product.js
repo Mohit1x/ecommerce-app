@@ -40,6 +40,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    compareAtPrice: {
+      type: Number,
+      required: true,
+    },
     reviews: [reviewSchema],
     stock: {
       type: Number,
@@ -48,7 +52,6 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       default: "uncategorized",
-      description: String,
     },
     averageRating: {
       type: Number,
