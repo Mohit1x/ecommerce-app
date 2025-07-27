@@ -48,6 +48,7 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       default: "uncategorized",
+      description: String,
     },
     averageRating: {
       type: Number,
