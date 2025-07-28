@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const clothesSizes = ["XS", "S", "M", "Xl", "XXL"];
 const sportssizes = ["3", "4", "5", "6", "7"];
 
-export const ProductDetails = ({ data, setData }) => {
+export const ProductDetails = ({ data, setData, setProductSizes }) => {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [sizesInWords, setSizesInWords] = useState(true);
+
+  useEffect(() => {
+    setProductSizes(selectedSizes);
+  }, [selectedSizes]);
 
   const handleSelectSizes = (size) => {
     if (selectedSizes.includes(size)) {
@@ -14,8 +18,6 @@ export const ProductDetails = ({ data, setData }) => {
     } else {
       setSelectedSizes((prev) => [...prev, size]);
     }
-
-    setData((prev) => ({ ...prev, sizes: selectedSizes }));
   };
 
   return (
@@ -102,6 +104,7 @@ export const ProductDetails = ({ data, setData }) => {
                 <div className="flex items-center gap-3">
                   {clothesSizes.map((size) => (
                     <div
+                      key={size}
                       onClick={() => handleSelectSizes(size)}
                       className={`bg-[#EDF0EF] w-10 h-10 rounded flex items-center justify-center cursor-pointer ${
                         selectedSizes.includes(size) &&
@@ -116,6 +119,7 @@ export const ProductDetails = ({ data, setData }) => {
                 <div className="flex items-center gap-3">
                   {sportssizes.map((size) => (
                     <div
+                      key={size}
                       onClick={() => handleSelectSizes(size)}
                       className={`bg-[#EDF0EF] w-10 h-10 rounded flex items-center justify-center cursor-pointer ${
                         selectedSizes.includes(size) &&

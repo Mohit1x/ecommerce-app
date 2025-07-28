@@ -4,17 +4,15 @@ import { ProductDetails } from "./ProductDetails";
 import { ProductImages } from "./ProductImages";
 
 const AddProduct = () => {
-  const [productImages, setProductImages] = useState();
-  const [productSizes, setProductSizes] = useState();
+  const [productImages, setProductImages] = useState([]);
+  const [productSizes, setProductSizes] = useState([]);
   const [data, setData] = useState({
-    images: productImages,
     name: "",
     description: "",
     price: 0,
     compareAtPrice: 0,
     stock: 0,
     category: "",
-    sizes: productSizes,
   });
 
   const handleSubmit = async () => {
@@ -23,7 +21,7 @@ const AddProduct = () => {
     try {
       const response = await axios.post(
         `${apiUrl}/product/create`,
-        { data },
+        { ...data, images: productImages, size: productSizes },
         { withCredentials: true }
       );
 
@@ -39,10 +37,17 @@ const AddProduct = () => {
         <h1 className="text-xl font-semibold">Add New Product</h1>
         <div className="flex gap-5 h-full">
           <div className="w-[30%] h-[80%]">
-            <ProductImages setData={setData} />
+            <ProductImages
+              productImages={productImages}
+              setProductImages={setProductImages}
+            />
           </div>
           <div className="w-[70%] h-full">
-            <ProductDetails data={data} setData={setData} />
+            <ProductDetails
+              data={data}
+              setData={setData}
+              setProductSizes={setProductSizes}
+            />
           </div>
         </div>
         <div className="self-end">

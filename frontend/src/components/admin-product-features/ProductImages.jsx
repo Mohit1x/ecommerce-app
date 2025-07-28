@@ -1,34 +1,43 @@
 import { useState } from "react";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
+import { compressToBase64 } from "lz-string";
 
-export const ProductImages = ({ setData }) => {
-  const [base64, setBase64] = useState(null);
-  const [preview, setPreview] = useState(null);
+export const ProductImages = ({ setProductImages, productImages }) => {
   const [showRemove, setShowRemove] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  console.log(selectedImage, "selected image index");
+  console.log(productImages, "product images");
+  console.log(selectedImage, "product images");
 
-  const [allProductImages, setAllProductImages] = useState([]);
-
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
+      try {
+        // Convert to base64
+        const base64 = await convertToBase64(file);
 
-      reader.onloadend = () => {
-        setPreview(reader.result);
-        setBase64(reader.result);
-        setAllProductImages((prev) => [...prev, reader.result]);
-      };
+        // Compress base64 string using lz-string
+        const compressedBase64 = compressToBase64(base64);
 
-      reader.readAsDataURL(file);
+        // Store compressed string in product images
+        setProductImages((prev) => [...prev, compressedBase64]);
+      } catch (error) {
+        console.error("Image base64 compression failed:", error);
+      }
     }
-
-    setData((prev) => ({ ...prev, images: allProductImages }));
   };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
+  };
+
   const handleRemoveImg = (indexToRemove) => {
-    setAllProductImages((prevImages) => {
+    setProductImages((prevImages) => {
       const newImages = prevImages.filter(
         (_, index) => index !== indexToRemove
       );
@@ -53,9 +62,9 @@ export const ProductImages = ({ setData }) => {
         <div className="flex flex-col gap-4 p-4 h-full rounded-xl">
           <h1 className="font-semibold">Upload Images</h1>
           <div className="w-full bg-[#EFEFEF] rounded-xl h-[80%] overflow-hidden flex items-center justify-center">
-            {allProductImages.length > 0 ? (
+            {productImages.length > 0 ? (
               <img
-                src={allProductImages[selectedImage]}
+                src={productImages[selectedImage]}
                 alt=""
                 className="h-full w-full object-contain"
               />
@@ -71,26 +80,28 @@ export const ProductImages = ({ setData }) => {
                   type="file"
                   id="file-upload"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleFileChange}
                 />
               </div>
             )}
           </div>
 
-          {allProductImages.length > 0 && (
+          {productImages.length > 0 && (
             <div className="h-[20%] grid grid-cols-4 gap-2">
-              {allProductImages?.map((images, index) => (
+              {productImages?.map((img, index) => (
                 <div
+                  key={index}
                   onClick={() => setSelectedImage(index)}
                   onMouseEnter={() => setShowRemove(index)}
                   onMouseLeave={() => setShowRemove(null)}
                   className={`overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#EFEFEF] rounded-xl hover:bg-gray-300 relative ${
-                    index == selectedImage
+                    index === selectedImage
                       ? "border border-gray-500 rounded-xl"
                       : ""
                   }`}
                 >
-                  <img src={images} className="h-full object-cover" />
+                  <img src={img} className="h-full object-cover" />
                   {showRemove === index && (
                     <div
                       onClick={() => handleRemoveImg(index)}
@@ -101,7 +112,7 @@ export const ProductImages = ({ setData }) => {
                   )}
                 </div>
               ))}
-              {allProductImages.length !== 4 && (
+              {productImages.length !== 4 && (
                 <div className="overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#e4f3ed] rounded-xl">
                   <label
                     htmlFor="file-upload"
@@ -113,6 +124,7 @@ export const ProductImages = ({ setData }) => {
                     type="file"
                     id="file-upload"
                     className="hidden"
+                    accept="image/*"
                     onChange={handleFileChange}
                   />
                 </div>
