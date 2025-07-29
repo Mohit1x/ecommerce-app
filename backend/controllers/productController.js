@@ -39,10 +39,7 @@ const createProduct = async (req, res) => {
       description,
       category: category || "uncategorized",
       stock: Number(stock) || 0,
-      image: {
-        public_id: req.file.filename,
-        url: req.file.path,
-      },
+      images: req.imageUrls.map((url) => ({ url })),
       rating: 0,
       reviews: [],
     });

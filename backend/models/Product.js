@@ -27,7 +27,6 @@ const productSchema = new mongoose.Schema(
     },
     images: [
       {
-        public_id: { type: String, required: true },
         url: { type: String, required: true },
       },
     ],
@@ -42,7 +41,6 @@ const productSchema = new mongoose.Schema(
     },
     compareAtPrice: {
       type: Number,
-      required: true,
     },
     reviews: [reviewSchema],
     stock: {

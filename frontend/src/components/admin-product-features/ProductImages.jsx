@@ -13,13 +13,10 @@ export const ProductImages = ({ setProductImages, productImages }) => {
     const file = e.target.files[0];
     if (file) {
       try {
-        // Convert to base64
         const base64 = await convertToBase64(file);
 
-        // Compress base64 string using lz-string
         const compressedBase64 = compressToBase64(base64);
 
-        // Store compressed string in product images
         setProductImages((prev) => [...prev, compressedBase64]);
       } catch (error) {
         console.error("Image base64 compression failed:", error);
