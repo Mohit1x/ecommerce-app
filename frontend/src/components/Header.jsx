@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
-        <img className="w-[125px]" src={AMAZON_LOGO} id="header-logo" />
+        <img className="w-[125px]" src={"/logo.png"} id="header-logo" />
       </Link>
       <div className="flex w-[400px] mr-56">
         <input
