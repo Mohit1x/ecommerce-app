@@ -20,7 +20,7 @@ app.use(
   })
 );
 
-console.log(process.env.FRONTEND_URL)
+console.log(process.env.FRONTEND_URL);
 
 app.use(cookieParser());
 app.use(express.json());
@@ -29,7 +29,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/product", productRoutes);

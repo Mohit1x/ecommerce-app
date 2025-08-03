@@ -1,55 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
-import { compressToBase64 } from "lz-string";
 
-export const ProductImages = ({ setProductImages, productImages }) => {
+export const ProductImages = ({ setProductImages }) => {
+  const [preview, setPreview] = useState([]);
   const [showRemove, setShowRemove] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [allProductImages, setAllProductImages] = useState([]);
 
-  console.log(productImages, "product images");
-  console.log(selectedImage, "product images");
+  useEffect(() => {
+    setProductImages(allProductImages);
+  }, [allProductImages]);
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      try {
-        const base64 = await convertToBase64(file);
+    if (!file) return;
 
-        const compressedBase64 = compressToBase64(base64);
-
-        setProductImages((prev) => [...prev, compressedBase64]);
-      } catch (error) {
-        console.error("Image base64 compression failed:", error);
-      }
-    }
-  };
-
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (err) => reject(err);
-    });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      // When base64 is ready, push both base64 and file in sync
+      setPreview((prev) => [...prev, reader.result]);
+      setAllProductImages((prev) => [...prev, file]);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleRemoveImg = (indexToRemove) => {
-    setProductImages((prevImages) => {
-      const newImages = prevImages.filter(
-        (_, index) => index !== indexToRemove
-      );
+    setAllProductImages((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
+    setPreview((prev) => {
+      const newPreview = prev.filter((_, index) => index !== indexToRemove);
 
       setSelectedImage((prevSelected) => {
+        if (newPreview.length === 0) return 0;
+
         if (prevSelected === indexToRemove) {
-          return Math.max(0, prevSelected - 1);
+          return Math.max(0, indexToRemove - 1);
         }
+
         if (prevSelected > indexToRemove) {
           return prevSelected - 1;
         }
+
         return prevSelected;
       });
 
-      return newImages;
+      return newPreview;
     });
   };
 
@@ -59,9 +55,9 @@ export const ProductImages = ({ setProductImages, productImages }) => {
         <div className="flex flex-col gap-4 p-4 h-full rounded-xl">
           <h1 className="font-semibold">Upload Images</h1>
           <div className="w-full bg-[#EFEFEF] rounded-xl h-[80%] overflow-hidden flex items-center justify-center">
-            {productImages.length > 0 ? (
+            {preview.length > 0 ? (
               <img
-                src={productImages[selectedImage]}
+                src={preview[selectedImage]}
                 alt=""
                 className="h-full w-full object-contain"
               />
@@ -77,16 +73,15 @@ export const ProductImages = ({ setProductImages, productImages }) => {
                   type="file"
                   id="file-upload"
                   className="hidden"
-                  accept="image/*"
                   onChange={handleFileChange}
                 />
               </div>
             )}
           </div>
 
-          {productImages.length > 0 && (
+          {preview.length > 0 && (
             <div className="h-[20%] grid grid-cols-4 gap-2">
-              {productImages?.map((img, index) => (
+              {preview.map((img, index) => (
                 <div
                   key={index}
                   onClick={() => setSelectedImage(index)}
@@ -109,7 +104,7 @@ export const ProductImages = ({ setProductImages, productImages }) => {
                   )}
                 </div>
               ))}
-              {productImages.length !== 4 && (
+              {preview.length !== 4 && (
                 <div className="overflow-hidden h-full w-full mx-auto flex items-center justify-center bg-[#e4f3ed] rounded-xl">
                   <label
                     htmlFor="file-upload"
@@ -121,7 +116,6 @@ export const ProductImages = ({ setProductImages, productImages }) => {
                     type="file"
                     id="file-upload"
                     className="hidden"
-                    accept="image/*"
                     onChange={handleFileChange}
                   />
                 </div>

@@ -18,17 +18,27 @@ const AddProduct = () => {
   const handleSubmit = async () => {
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    try {
-      const response = await axios.post(
-        `${apiUrl}/product/create`,
-        { ...data, images: productImages, size: productSizes },
-        { withCredentials: true }
-      );
+    const formData = new FormData();
 
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("compareAtPrice", data.compareAtPrice);
+    formData.append("stock", data.stock);
+    formData.append("category", data.category);
+
+    productSizes.forEach((size) => formData.append("sizes[]", size));
+
+    productImages.forEach((file) => {
+      formData.append("images", file);
+    });
+
+    const res = await axios.post(`${apiUrl}/product/create`, formData, {
+      withCredentials: true,
+    });
+
+    const result = await res.json();
+    console.log(result);
   };
 
   return (
@@ -53,7 +63,7 @@ const AddProduct = () => {
         <div className="self-end">
           <button
             onClick={handleSubmit}
-            className="p-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold"
+            className="p-2 bg-blue-500 hover:bg-blue-400 rounded text-white font-semibold"
           >
             Add Product
           </button>

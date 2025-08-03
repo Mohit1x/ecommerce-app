@@ -86,6 +86,10 @@ export const ProductDetails = ({ data, setData, setProductSizes }) => {
           <div className="w-full flex flex-col gap-2">
             <label className="text-sm font-semibold">Product Category</label>
             <input
+              value={data.category}
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, category: e.target.value }))
+              }
               type="text"
               className="p-2 bg-[#EDF0EF] outline-none rounded"
             />
