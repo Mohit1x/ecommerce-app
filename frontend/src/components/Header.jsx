@@ -1,14 +1,9 @@
-import {
-  AMAZON_LOGO,
-  SEARCH_ICON,
-  USER_ICON,
-  WHISHLIST_ICON,
-} from "../utils/constants";
+import { LOGO, SEARCH_ICON, WHISHLIST_ICON } from "../utils/constants";
 import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RiShoppingBag2Fill } from "react-icons/ri";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ProfileDropDown } from "./drop-downs/ProfileDropDown";
 import { CiUser } from "react-icons/ci";
 
@@ -19,23 +14,21 @@ const Header = () => {
 
   const [showProfileDropDown, setShowProfileDropDown] = useState(false);
 
-  const { user, isAuthenticated, isLoading } = useSelector(
-    (state) => state.auth || {}
-  );
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
 
   const userName = user?.name;
 
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
-        <img className="w-[125px]" src={AMAZON_LOGO} id="header-logo" />
+        <img className="w-20" src={LOGO} id="header-logo" />
       </Link>
       <div className="flex w-[400px] mr-56">
         <input
           className="bg-[#2D3B47] border-2 text-white focus:outline-none pl-2 border-[#455B6E] w-[100%] h-12 rounded-l-md placeholder:font-semibold"
           placeholder="  Search..."
         />
-        <div className="bg-[#E99317] py-2 px-3 rounded-r-md">
+        <div className="bg-theme py-2 px-3 rounded-r-md">
           {" "}
           <img className="w-9 h-8 cursor-pointer" src={SEARCH_ICON} />
         </div>

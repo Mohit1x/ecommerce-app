@@ -10,7 +10,7 @@ const AllProducts = ({ list }) => {
 
   const allProducts = async () => {
     try {
-      const data = await fetch(`https://fakestoreapi.com/${list}`);
+      const data = await fetch(`https://fakestoreapi.com/products`);
       const json = await data.json();
       dispatch(addProducts(json));
     } catch (error) {
