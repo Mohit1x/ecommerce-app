@@ -14,14 +14,10 @@ const uploadToCloudinary = async (req, res, next) => {
       folder: "categories",
     });
 
-    console.log(result, "clodunary result");
-
     req.image = {
       image: result.secure_url,
       public_id: result.public_id,
     };
-
-    console.log(req.image, "req.image url");
 
     next();
   } catch (error) {

@@ -5,9 +5,6 @@ const createCategory = async (req, res) => {
     const { image } = req.image;
     const { name } = req.body;
 
-    console.log(req.image, "image url");
-    console.log(image, "image console");
-
     if (!name || !req.image) {
       return res.status(400).json({ message: "Name and image are required" });
     }
