@@ -21,16 +21,18 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-[#1C2228] h-[100px] items-center shadow-md top-0 fixed z-50 w-full px-10">
       <Link to="/">
-        <img className="w-20" src={LOGO} id="header-logo" />
+        <img className="w-32" src={LOGO} id="header-logo" />
       </Link>
-      <div className="flex w-[400px] mr-56">
-        <input
-          className="bg-[#2D3B47] border-2 text-white focus:outline-none pl-2 border-[#455B6E] w-[100%] h-12 rounded-l-md placeholder:font-semibold"
-          placeholder="  Search..."
-        />
-        <div className="bg-theme py-2 px-3 rounded-r-md">
-          {" "}
-          <img className="w-9 h-8 cursor-pointer" src={SEARCH_ICON} />
+      <div className="flex items-center justify-center w-[400px]">
+        <div className="flex w-full">
+          <input
+            className="bg-[#2D3B47] border-2 text-white focus:outline-none pl-2 border-[#455B6E] w-[100%] h-12 rounded-l-md placeholder:font-semibold"
+            placeholder="  Search..."
+          />
+          <div className="bg-theme py-2 px-3 rounded-r-md">
+            {" "}
+            <img className="w-9 h-8 cursor-pointer" src={SEARCH_ICON} />
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-8 ">

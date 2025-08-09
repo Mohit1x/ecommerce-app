@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import Whislist from "./components/Whislist";
@@ -15,6 +14,7 @@ import { useState } from "react";
 import { getMe } from "./redux slices/authSlice";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import AddProduct from "./components/admin-product-features/AddProduct";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: <HomePage />,
         },
         {
           path: "/view/:id",
@@ -79,7 +79,7 @@ function App() {
   ]);
 
   return (
-    <div className="bg-[#F6F5F5] h-full">
+    <div className="h-full">
       <Toaster />
       <RouterProvider router={appRouter} />
     </div>

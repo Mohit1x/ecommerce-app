@@ -22,7 +22,7 @@ const ProfileContainer = () => {
   };
 
   return (
-    <div className="w-full bg-[#F5F5F5]">
+    <div className="w-full bg-[#F5F5F5] flex items-center justify-center mt-20 max-w-7xl mx-auto">
       <div className="flex flex-col gap-10 h-full w-full py-5 px-5 md:py-10 md:px-20">
         <h1 className="text-xl font-semibold">Profile</h1>
         <div className="bg-[#FFFFFF] w-full p-5 rounded-xl flex flex-col gap-5">
