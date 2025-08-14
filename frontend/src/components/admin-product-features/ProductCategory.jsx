@@ -38,7 +38,12 @@ export const ProductCategory = () => {
       >
         <button className="text-white font-semibold">Add Category</button>
       </div>
-      {isModelOpen && <AddCategoryModel setIsModelOpen={setIsModelOpen} />}
+      {isModelOpen && (
+        <AddCategoryModel
+          setIsModelOpen={setIsModelOpen}
+          getCategories={getCategories}
+        />
+      )}
     </div>
   );
 };
