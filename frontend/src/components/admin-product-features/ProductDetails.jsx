@@ -66,7 +66,7 @@ export const ProductDetails = ({ data, setData, setProductSizes }) => {
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-sm font-semibold">Product Category</label>
-          <ProductCategory />
+          <ProductCategory data={data} setData={setData} />
         </div>
         <ProductSizes setProductSizes={setProductSizes} />
       </div>

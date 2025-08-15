@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AddCategoryModel } from "../models/AddCategoryModel";
 
-export const ProductCategory = () => {
+export const ProductCategory = ({ data, setData }) => {
   const [allCategories, setAllCategories] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
 
@@ -23,10 +23,16 @@ export const ProductCategory = () => {
   return (
     <div className="w-full flex gap-5">
       <div className="w-full flex flex-col gap-2">
-        <select className="p-2 outline-none border border-gray-800 focus:border focus:border-blue-500 rounded">
+        <select
+          className="p-2 outline-none border border-gray-800 focus:border focus:border-blue-500 rounded"
+          onChange={(e) =>
+            setData((prev) => ({ ...prev, category: e.target.value }))
+          }
+          value={data.category}
+        >
           {allCategories.map((categ) => (
             <option name="" id="" key={categ} className="p-5">
-              {categ.name}
+              <span>{categ.name}</span>
             </option>
           ))}
         </select>

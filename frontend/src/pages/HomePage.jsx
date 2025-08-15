@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import AllProducts from "../components/AllProducts";
-import Hero from "../components/Hero";
+import Hero from "../components/homepage-components/Hero";
+import AllProducts from "../components/homepage-components/AllProducts";
 
 const HomePage = () => {
   const ref = useRef();

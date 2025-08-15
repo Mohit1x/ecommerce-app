@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
 export const AddCategoryModel = ({ setIsModelOpen, getCategories }) => {
   const [preview, setPreview] = useState("");
@@ -46,8 +47,14 @@ export const AddCategoryModel = ({ setIsModelOpen, getCategories }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-1/2 bg-white flex flex-col gap-2 items-start p-5 rounded"
+        className="w-1/2 bg-white flex flex-col gap-2 items-start p-5 rounded relative"
       >
+        <div
+          className="absolute right-5 cursor-pointer"
+          onClick={() => setIsModelOpen(false)}
+        >
+          <RxCross2 size={20} className="text-gray-700" />
+        </div>
         <h1 className="text-xl font-semibold">Add Category</h1>
         <div className="flex flex-col gap-1 mx-auto">
           {preview ? (

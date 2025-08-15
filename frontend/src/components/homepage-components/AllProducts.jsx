@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import ProductCard from "./ProductCard";
 import { useDispatch } from "react-redux";
-import { addProducts } from "../redux slices/AllProductsSlice";
+import { addProducts } from "../../redux slices/AllProductsSlice";
 import { useSelector } from "react-redux";
-import Shimmer from "./Shimmer";
+import Shimmer from "../Shimmer";
+import ProductCard from "../ProductCard";
 
 const AllProducts = ({ list }) => {
   const dispatch = useDispatch();

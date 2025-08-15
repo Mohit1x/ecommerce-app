@@ -1,4 +1,4 @@
-import { HERO_BG_IMG } from "../utils/constants";
+import { HERO_BG_IMG } from "../../utils/constants";
 
 const Hero = ({ scrollRef }) => {
   const handleBrowseProducts = () => {

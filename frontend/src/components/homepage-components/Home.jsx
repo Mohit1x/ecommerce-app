@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import AllProducts from "./AllProducts";
+import AllProducts from "../AllProducts";
 import Hero from "./Hero";
 
 const Home = () => {
